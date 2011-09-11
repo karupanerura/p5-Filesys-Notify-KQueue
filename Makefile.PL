@@ -5,7 +5,9 @@ readme_from 'lib/Filesys/Notify/KQueue.pm';
 readme_pod_from 'lib/Filesys/Notify/KQueue.pm';
 githubmeta;
 
-# requires '';
+requires 'IO::KQueue';
+requires 'IO::File';
+requires 'File::Find';
 
 tests 't/*.t';
 author_tests 'xt';

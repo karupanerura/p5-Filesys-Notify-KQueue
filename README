@@ -1,16 +1,31 @@
 NAME
-    Filesys::Notify::KQueue -
+    Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
 
 SYNOPSIS
       use Filesys::Notify::KQueue;
 
+      my $notify = Filesys::Notify::KQueue->new(
+          path    => [qw(~/Maildir/new)],
+          timeout => 1,
+      );
+      $notify->watch(sub {
+          my @events = @_;
+
+          foreach my $event (@events) {
+              ## ....
+          }
+      });
+
 DESCRIPTION
-    Filesys::Notify::KQueue is
+    Filesys::Notify::KQueue is IO::KQueue wrapper for watching file system.
 
 AUTHOR
     Kenta Sato <karupa@cpan.org>
 
 SEE ALSO
+    IO::KQueue Filesys::Notify::Simple AnyEvent::Filesys::Notify
+    File::ChangeNotify Mac::FSEvents Linux::Inotify2
+
 LICENSE
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

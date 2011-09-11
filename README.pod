@@ -1,20 +1,38 @@
+=encoding utf-8
+
+=for stopwords
+
 =head1 NAME
 
-Filesys::Notify::KQueue -
+Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
 
 =head1 SYNOPSIS
 
   use Filesys::Notify::KQueue;
 
+  my $notify = Filesys::Notify::KQueue->new(
+      path    => [qw(~/Maildir/new)],
+      timeout => 1,
+  );
+  $notify->watch(sub {
+      my @events = @_;
+
+      foreach my $event (@events) {
+          ## ....
+      }
+  });
+
 =head1 DESCRIPTION
 
-Filesys::Notify::KQueue is
+Filesys::Notify::KQueue is IO::KQueue wrapper for watching file system.
 
 =head1 AUTHOR
 
 Kenta Sato E<lt>karupa@cpan.orgE<gt>
 
 =head1 SEE ALSO
+
+L<IO::KQueue> L<Filesys::Notify::Simple> L<AnyEvent::Filesys::Notify> L<File::ChangeNotify> L<Mac::FSEvents> L<Linux::Inotify2>
 
 =head1 LICENSE
 
