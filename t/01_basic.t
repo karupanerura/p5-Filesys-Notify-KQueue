@@ -5,11 +5,12 @@ use Test::More;
 use Test::SharedFork;
 use FindBin;
 
+my $timeout = 6;
 plan tests => 5;
 
 my $w = Filesys::Notify::KQueue->new(
     path    => [ "lib", "t" ],
-    timeout => 5,
+    timeout => $timeout,
 );
 
 my $pid = fork;
@@ -26,6 +27,8 @@ if ($pid == 0) {
     Test::SharedFork->parent;
     my $event_counter = 0;
     eval {
+        local $SIG{ALRM} = sub { die 'timeout' };
+        alarm $timeout;
         $w->wait(sub {
             die 'test_faild' if($event_counter >= 2);
             foreach my $event (@_) {
@@ -38,6 +41,7 @@ if ($pid == 0) {
             }
             die 'test_finish' if($event_counter == 2);
         });
+        alarm 0;
     };
     pass('Test finish') if($@ =~ /^test_finish at/);
 
