@@ -14,7 +14,7 @@ Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
       path    => [qw(~/Maildir/new)],
       timeout => 1,
   );
-  $notify->watch(sub {
+  $notify->wait(sub {
       my @events = @_;
 
       foreach my $event (@events) {

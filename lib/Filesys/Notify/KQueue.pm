@@ -4,7 +4,6 @@ use warnings;
 our $VERSION = '0.01';
 
 use File::Find;
-use IO::File;
 use IO::KQueue;
 
 sub default_timeout { 1 }
@@ -52,12 +51,12 @@ sub add_file {
     my($self, $file) = @_;
 
     $self->{_files}{$file} = do {
-        my $fh = IO::File->new($file, 'r') or die("Can't open '$file': $!");
-        die "Can't get fileno '$file'" unless defined $fh->fileno;
+        open(my $fh, '<', $file) or die("Can't open '$file': $!");
+        die "Can't get fileno '$file'" unless defined fileno($fh);
 
         # add to watch
         $self->kqueue->EV_SET(
-            $fh->fileno,
+            fileno($fh),
             EVFILT_VNODE,
             EV_ADD | EV_CLEAR,
             NOTE_DELETE | NOTE_WRITE | NOTE_RENAME | NOTE_REVOKE,
@@ -84,7 +83,6 @@ sub files { keys %{shift->{_files}} }
 sub wait {
     my ($self, $cb) = @_;
 
-    $self->kqueue->kevent($self->timeout);
     while (1) {
         my $events = $self->get_events;
         $cb->(@$events) if(@$events);
@@ -103,13 +101,11 @@ sub get_events {
 
         if(($flags & NOTE_DELETE) or ($flags & NOTE_RENAME)) {
             my $event = ($flags & NOTE_DELETE) ? 'delete' : 'rename';
-            push(@events, +{
-                event => $event,
-                path  => $path,
-            });
+
             if (-d $path) {
                 foreach my $stored_path ( $self->files ) {
-                    next if $stored_path !~ /^$path/;
+                    next if $stored_path !~ m{^${path}/};
+                    close($self->{_files}{$stored_path});
                     delete($self->{_files}{$stored_path});
                     push(@events, +{
                         event => $event,
@@ -117,6 +113,13 @@ sub get_events {
                     });
                 }
             }
+
+            close($self->{_files}{$path});
+            delete($self->{_files}{$path});
+            push(@events, +{
+                event => $event,
+                path  => $path,
+            });
         }
         elsif ($flags & NOTE_WRITE) {
             if (-f $path) {
@@ -163,7 +166,7 @@ Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
       path    => [qw(~/Maildir/new)],
       timeout => 1,
   );
-  $notify->watch(sub {
+  $notify->wait(sub {
       my @events = @_;
 
       foreach my $event (@events) {
