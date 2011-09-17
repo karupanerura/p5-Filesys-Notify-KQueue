@@ -1,7 +1,7 @@
 package Filesys::Notify::KQueue;
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use File::Find;
 use IO::KQueue;
@@ -83,10 +83,12 @@ sub files { keys %{shift->{_files}} }
 sub wait {
     my ($self, $cb) = @_;
 
-    while (1) {
-        my $events = $self->get_events;
-        $cb->(@$events) if(@$events);
+    my $events = $self->get_events;
+    until (@$events) {
+        $events = $self->get_events;
     }
+
+    $cb->(@$events);
 }
 
 sub get_events {
