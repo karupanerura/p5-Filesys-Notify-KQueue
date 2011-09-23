@@ -4,3 +4,6 @@ Revision history for Perl extension Filesys::Notify::KQueue
         - original version
 0.02    Sun Sep 18 2011
         - wait method is compatible with the interface of Filesys::Notify::Simple now.
+0.03    Sat Sep 24 2011
+        - fixed default timeout.
+        - write pod.
