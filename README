@@ -19,6 +19,20 @@ SYNOPSIS
 DESCRIPTION
     Filesys::Notify::KQueue is IO::KQueue wrapper for watching file system.
 
+METHODS
+  new - Hash or HashRef
+    This is constructor method.
+
+    path - ArrayRef[Str]
+        Watch files or directorys.
+
+    timeout - Int
+        KQueue's timeout. (mili second)
+
+  wait - CodeRef
+    There is no file name based filter. Do it in your own code. You can get
+    types of events (create, modify, rename, delete).
+
 AUTHOR
     Kenta Sato <karupa@cpan.org>
 

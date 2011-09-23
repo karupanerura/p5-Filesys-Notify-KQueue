@@ -26,6 +26,29 @@ Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
 
 Filesys::Notify::KQueue is IO::KQueue wrapper for watching file system.
 
+=head1 METHODS
+
+=head2 new - Hash or HashRef
+
+This is constructor method.
+
+=over 4
+
+=item path - ArrayRef[Str]
+
+Watch files or directorys.
+
+=item timeout - Int
+
+KQueue's timeout. (mili second)
+
+=back
+
+=head2 wait - CodeRef
+
+There is no file name based filter. Do it in your own code.
+You can get types of events (create, modify, rename, delete).
+
 =head1 AUTHOR
 
 Kenta Sato E<lt>karupa@cpan.orgE<gt>

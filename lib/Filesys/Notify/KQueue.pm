@@ -6,7 +6,7 @@ our $VERSION = '0.02';
 use File::Find;
 use IO::KQueue;
 
-sub default_timeout { 1 }
+sub default_timeout { 1000 }
 
 sub new {
     my $class = shift;
@@ -179,6 +179,29 @@ Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
 =head1 DESCRIPTION
 
 Filesys::Notify::KQueue is IO::KQueue wrapper for watching file system.
+
+=head1 METHODS
+
+=head2 new - Hash or HashRef
+
+This is constructor method.
+
+=over 4
+
+=item path - ArrayRef[Str]
+
+Watch files or directorys.
+
+=item timeout - Int
+
+KQueue's timeout. (mili second)
+
+=back
+
+=head2 wait - CodeRef
+
+There is no file name based filter. Do it in your own code.
+You can get types of events (create, modify, rename, delete).
 
 =head1 AUTHOR
 
