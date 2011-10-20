@@ -1,7 +1,7 @@
 package Filesys::Notify::KQueue;
 use strict;
 use warnings;
-our $VERSION = 'y';
+our $VERSION = '0.04';
 
 use File::Find;
 use IO::KQueue;
