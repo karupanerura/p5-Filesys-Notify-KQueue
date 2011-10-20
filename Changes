@@ -7,3 +7,5 @@ Revision history for Perl extension Filesys::Notify::KQueue
 0.03    Sat Sep 24 2011
         - fixed default timeout.
         - write pod.
+0.04    Sat Oct 20 2011
+        - fixed test dependency. (thanks ANDK)
