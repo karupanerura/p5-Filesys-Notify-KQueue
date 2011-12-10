@@ -3,7 +3,7 @@ use strict;
 use warnings;
 our $VERSION = '0.05';
 
-use File::Find;
+use File::Find ();
 use IO::KQueue;
 
 sub default_timeout { 1000 }
@@ -72,13 +72,28 @@ sub add_dir {
     my($self, $dir) = @_;
 
     $self->add_file($dir);
-    find(+{
+    File::Find::find +{
         wanted => sub { $self->add($File::Find::name) },
         no_chdir => 1,
-    }, $dir);
+    } => $dir;
 }
 
-sub files { keys %{shift->{_files}} }
+sub files        { keys   %{shift->{_files}} }
+sub file_handles { values %{shift->{_files}} }
+sub get_fh       {
+    my %files = %{shift->{_files}};
+    @files{@_};
+}
+
+sub unwatch {
+    my $self = shift;
+    my @path = @_;
+
+    foreach my $path (@_) {
+        close($self->{_files}{$path});
+        delete($self->{_files}{$path});
+    }
+}
 
 sub wait {
     my ($self, $cb) = @_;
@@ -105,43 +120,41 @@ sub get_events {
             my $event = ($flags & NOTE_DELETE) ? 'delete' : 'rename';
 
             if (-d $path) {
-                foreach my $stored_path ( $self->files ) {
-                    next if $stored_path !~ m{^${path}/};
-                    close($self->{_files}{$stored_path});
-                    delete($self->{_files}{$stored_path});
-                    push(@events, +{
+                my @stored_paths = grep { m{^${path}/} } $self->files;
+                $self->unwatch(@stored_paths);
+                push @events => map {
+                    +{
                         event => $event,
-                        path  => $path,
-                    });
-                }
+                        path  => $_,
+                    }
+                } @stored_paths;
             }
 
-            close($self->{_files}{$path});
-            delete($self->{_files}{$path});
-            push(@events, +{
+            $self->unwatch($path);
+            push @events => +{
                 event => $event,
                 path  => $path,
-            });
+            };
         }
         elsif ($flags & NOTE_WRITE) {
             if (-f $path) {
-                push(@events, +{
+                push @events => +{
                     event => 'modify',
                     path  => $path,
-                });
+                };
             }
             elsif (-d $path) {
-                find(+{
+                File::Find::finddepth +{
                     wanted => sub {
                         return if exists($self->{_files}{$File::Find::name});
-                        push(@events, +{
+                        push @events => +{
                             event => 'create',
                             path  => $File::Find::name,
-                        });
+                        };
                         $self->add($File::Find::name);
                     },
                     no_chdir => 1,
-                }, $path);
+                } => $path;
             }
         }
     }
@@ -166,7 +179,7 @@ Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
 
   my $notify = Filesys::Notify::KQueue->new(
       path    => [qw(~/Maildir/new)],
-      timeout => 1,
+      timeout => 1000,
   );
   $notify->wait(sub {
       my @events = @_;
@@ -190,11 +203,11 @@ This is constructor method.
 
 =item path - ArrayRef[Str]
 
-Watch files or directorys.
+Watch files or directories.
 
 =item timeout - Int
 
-KQueue's timeout. (mili second)
+KQueue's timeout. (milli second)
 
 =back
 

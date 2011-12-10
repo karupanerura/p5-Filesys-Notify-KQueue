@@ -24,7 +24,7 @@ if ($pid == 0) {
     my $event;
     for (1..2) {
         alarm 10;
-        $w->wait(sub { $event = shift }); # create
+        $w->wait(sub { $event = shift; }); # create
         like $event->{path}, qr/rm_create\.data/;
     }
 

@@ -6,7 +6,7 @@ SYNOPSIS
 
       my $notify = Filesys::Notify::KQueue->new(
           path    => [qw(~/Maildir/new)],
-          timeout => 1,
+          timeout => 1000,
       );
       $notify->wait(sub {
           my @events = @_;
@@ -24,10 +24,10 @@ METHODS
     This is constructor method.
 
     path - ArrayRef[Str]
-        Watch files or directorys.
+        Watch files or directories.
 
     timeout - Int
-        KQueue's timeout. (mili second)
+        KQueue's timeout. (milli second)
 
   wait - CodeRef
     There is no file name based filter. Do it in your own code. You can get

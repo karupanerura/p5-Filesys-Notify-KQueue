@@ -12,7 +12,7 @@ Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
 
   my $notify = Filesys::Notify::KQueue->new(
       path    => [qw(~/Maildir/new)],
-      timeout => 1,
+      timeout => 1000,
   );
   $notify->wait(sub {
       my @events = @_;
@@ -36,11 +36,11 @@ This is constructor method.
 
 =item path - ArrayRef[Str]
 
-Watch files or directorys.
+Watch files or directories.
 
 =item timeout - Int
 
-KQueue's timeout. (mili second)
+KQueue's timeout. (milli second)
 
 =back
 

@@ -13,7 +13,9 @@ author_tests 'xt';
 
 test_requires 'Test::More';
 test_requires 'Test::SharedFork';
+test_requires 'File::Path';
+test_requires 'File::Find';
+test_requires 'FindBin';
 
 auto_set_repository;
-auto_include;
 WriteAll;
