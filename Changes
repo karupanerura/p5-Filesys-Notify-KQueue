@@ -12,3 +12,11 @@ Revision history for Perl extension Filesys::Notify::KQueue
 0.05    Thu Oct 20 2011
         - build_require to test_require.
         - fixed a day of the week in Changes.
+0.06    Sun Dec 11 2011
+        [bugfix]
+          - cannot set timeout.
+          - cannnot get all event if create nested directories.
+        - add test "02_nest.t"
+        - fixed spell miss.
+        - coding style is changed a little.
+        - not import File::Find's export functions.
