@@ -20,3 +20,5 @@ Revision history for Perl extension Filesys::Notify::KQueue
         - fixed spell miss.
         - coding style is changed a little.
         - not import File::Find's export functions.
+0.07    Sun Dec 11 2011
+        - add t::Util to MANIFEST.(oops)
