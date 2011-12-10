@@ -102,6 +102,7 @@ sub test_fork (&) {## no critic
             $child_code->($child_rdr, $child_wtr);
             close $parent_rdr;
             close $parent_wtr;
+            exit(0);
         }
         elsif ($pid != 0) {
             Test::SharedFork->parent;
