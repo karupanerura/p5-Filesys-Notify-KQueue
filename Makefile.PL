@@ -14,8 +14,11 @@ author_tests 'xt';
 test_requires 'Test::More';
 test_requires 'Test::SharedFork';
 test_requires 'File::Path';
-test_requires 'File::Find';
+test_requires 'IO::Handle';
 test_requires 'FindBin';
+test_requires 'Carp';
+test_requires 'parent';
+test_requires 'Exporter';
 
 auto_set_repository;
 WriteAll;
