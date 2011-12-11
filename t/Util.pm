@@ -100,8 +100,8 @@ sub test_fork (&) {## no critic
             close $parent_rdr;
             close $parent_wtr;
             $child_code->($child_rdr, $child_wtr);
-            close $parent_rdr;
-            close $parent_wtr;
+            close $child_rdr;
+            close $child_wtr;
             exit(0);
         }
         elsif ($pid != 0) {
