@@ -13,7 +13,7 @@ author_tests 'xt';
 
 test_requires 'Test::More';
 test_requires 'Test::SharedFork';
-test_requires 'File::Path';
+test_requires 'File::Path' => '2.06_05';
 test_requires 'IO::Handle';
 test_requires 'FindBin';
 test_requires 'Carp';
