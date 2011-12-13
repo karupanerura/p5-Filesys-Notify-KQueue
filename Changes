@@ -22,3 +22,5 @@ Revision history for Perl extension Filesys::Notify::KQueue
         - not import File::Find's export functions.
 0.07    Sun Dec 11 2011
         - add t::Util to MANIFEST.(oops)
+0.08    Wed Dec 14 2011
+        - File::Path after version 2.06_05 required at test.(oops)
