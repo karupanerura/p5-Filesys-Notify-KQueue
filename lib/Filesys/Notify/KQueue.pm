@@ -207,7 +207,7 @@ Watch files or directories.
 
 =item timeout - Int
 
-KQueue's timeout. (milli second)
+KQueue's timeout. (millisecond)
 
 =back
 

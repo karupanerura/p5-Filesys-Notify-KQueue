@@ -34,7 +34,7 @@ This is constructor method.
 
 - timeout - Int
 
-    KQueue's timeout. (milli second)
+    KQueue's timeout. (millisecond)
 
 ## wait - CodeRef
 
