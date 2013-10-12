@@ -9,7 +9,7 @@ test_fork {
     child {
         sleep 3;
         my $test_file = "$FindBin::Bin/x/rm_create.data";
-        open my $out, ">", $test_file;
+        open my $out, ">", $test_file or die $!;
         print $out "foo" . time;
         close $out;
         sleep 3;
