@@ -4,7 +4,7 @@
       "Kenta Sato <karupa@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.7.4, CPAN::Meta::Converter version 2.132661",
+   "generated_by" : "Minilla/v0.7.5, CPAN::Meta::Converter version 2.132661",
    "license" : [
       "perl_5"
    ],
@@ -26,38 +26,34 @@
       ]
    },
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Carp" : "0",
-            "Exporter" : "0",
-            "ExtUtils::MakeMaker" : "6.36",
-            "File::Path" : "2.06_05",
-            "FindBin" : "0",
-            "IO::Handle" : "0",
-            "Test::More" : "0",
-            "Test::SharedFork" : "0",
-            "parent" : "0"
-         }
-      },
       "configure" : {
          "requires" : {
             "CPAN::Meta" : "0",
             "CPAN::Meta::Prereqs" : "0",
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.38",
+            "perl" : "5.008_001"
          }
       },
       "develop" : {
          "requires" : {
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion" : "0.10108",
+            "Test::Perl::Critic" : "0",
             "Test::Pod" : "1.41",
             "Test::Spellunker" : "v0.2.7"
          }
       },
       "runtime" : {
          "requires" : {
-            "File::Find" : "0",
             "IO::KQueue" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0",
+            "Test::SharedFork" : "0",
+            "parent" : "0",
+            "t::Util" : "0"
          }
       }
    },

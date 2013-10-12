@@ -1,14 +1,19 @@
-requires 'File::Find';
 requires 'IO::KQueue';
 
-on build => sub {
-    requires 'Carp';
-    requires 'Exporter';
-    requires 'ExtUtils::MakeMaker', '6.36';
-    requires 'File::Path', '2.06_05';
-    requires 'FindBin';
-    requires 'IO::Handle';
+on configure => sub {
+    requires 'CPAN::Meta';
+    requires 'CPAN::Meta::Prereqs';
+    requires 'Module::Build';
+    requires 'perl', '5.008_001';
+};
+
+on test => sub {
     requires 'Test::More';
     requires 'Test::SharedFork';
     requires 'parent';
+    requires 't::Util';
+};
+
+on develop => sub {
+    requires 'Test::Perl::Critic';
 };
