@@ -10,6 +10,8 @@ my @test_paths = (
     "$FindBin::Bin/x/nest/nest/1",
 );
 
+mkdir "$FindBin::Bin/x" unless -d "$FindBin::Bin/x";
+
 my $sleep_time = 3;
 my $dir = 't/x';
 my $kqueue_timeout = $sleep_time * 2 * 1000;

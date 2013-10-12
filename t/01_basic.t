@@ -4,6 +4,8 @@ use FindBin;
 
 plan tests => 2;
 
+mkdir "$FindBin::Bin/x" unless -d "$FindBin::Bin/x";
+
 my $w = Filesys::Notify::KQueue->new(path => [ "lib", "t" ]);
 test_fork {
     child {
