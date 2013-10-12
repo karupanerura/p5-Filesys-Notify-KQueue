@@ -1,5 +1,7 @@
 Revision history for Perl extension Filesys::Notify::KQueue
 
+{{$NEXT}}
+
 0.01    Sun Sep 11 2011
         - original version
 0.02    Sun Sep 18 2011
