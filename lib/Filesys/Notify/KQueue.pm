@@ -1,7 +1,7 @@
 package Filesys::Notify::KQueue;
 use strict;
 use warnings;
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 use File::Find ();
 use IO::KQueue;
@@ -169,7 +169,7 @@ __END__
 
 =encoding utf-8
 
-=for stopwords
+=for stopwords KQueue's
 
 =head1 NAME
 
