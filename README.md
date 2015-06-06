@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/karupanerura/p5-Filesys-Notify-KQueue.svg?branch=master)](https://travis-ci.org/karupanerura/p5-Filesys-Notify-KQueue)
 # NAME
 
 Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
@@ -47,7 +48,7 @@ Kenta Sato <karupa@cpan.org>
 
 # SEE ALSO
 
-[IO::KQueue](http://search.cpan.org/perldoc?IO::KQueue) [Filesys::Notify::Simple](http://search.cpan.org/perldoc?Filesys::Notify::Simple) [AnyEvent::Filesys::Notify](http://search.cpan.org/perldoc?AnyEvent::Filesys::Notify) [File::ChangeNotify](http://search.cpan.org/perldoc?File::ChangeNotify) [Mac::FSEvents](http://search.cpan.org/perldoc?Mac::FSEvents) [Linux::Inotify2](http://search.cpan.org/perldoc?Linux::Inotify2)
+[IO::KQueue](https://metacpan.org/pod/IO::KQueue) [Filesys::Notify::Simple](https://metacpan.org/pod/Filesys::Notify::Simple) [AnyEvent::Filesys::Notify](https://metacpan.org/pod/AnyEvent::Filesys::Notify) [File::ChangeNotify](https://metacpan.org/pod/File::ChangeNotify) [Mac::FSEvents](https://metacpan.org/pod/Mac::FSEvents) [Linux::Inotify2](https://metacpan.org/pod/Linux::Inotify2)
 
 # LICENSE
 

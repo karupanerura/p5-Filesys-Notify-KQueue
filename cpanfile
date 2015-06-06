@@ -1,13 +1,12 @@
 requires 'IO::KQueue';
 
 on configure => sub {
-    requires 'CPAN::Meta';
-    requires 'CPAN::Meta::Prereqs';
-    requires 'Module::Build';
+    requires 'Module::Build::Tiny', '0.035';
     requires 'perl', '5.008_001';
 };
 
 on test => sub {
+    requires 'File::Path';
     requires 'Test::More';
     requires 'Test::SharedFork';
     requires 'parent';

@@ -19,3 +19,4 @@ MYMETA.yml
 !META.json
 !LICENSE
 _build/
+/Build.bat
