@@ -13,7 +13,7 @@ sub new {
     my $args  = (@_ == 1) ? $_[0] : +{ @_ };
     my $self  = bless(+{} => $class);
 
-    $self->timeout($args->{timeout} || $class->default_timeout);
+    $self->timeout(exists $args->{timeout} ? $args->{timeout} : $class->default_timeout);
     $self->{_kqueue} = $args->{kqueue} if exists($args->{kqueue});
     $self->add(@{$args->{path}})       if exists($args->{path});
 
@@ -99,8 +99,10 @@ sub wait {
     my ($self, $cb) = @_;
 
     my $events = $self->get_events;
-    until (@$events) {
-        $events = $self->get_events;
+    if ($self->timeout) {
+        until (@$events) {
+            $events = $self->get_events;
+        }
     }
 
     $cb->(@$events);
