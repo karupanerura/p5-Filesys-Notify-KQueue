@@ -2,6 +2,10 @@ Revision history for Perl extension Filesys::Notify::KQueue
 
 {{$NEXT}}
 
+0.11 2015-06-07T11:29:51Z
+
+    - Fixed dependency. (thanks SREZIC)
+
 0.10 2015-06-06T01:28:24Z
 
     - Allow to set zero/undef as `timeout`. Timeout implementation doesn't match IO::KQueue. (thanks TLINDEN)
