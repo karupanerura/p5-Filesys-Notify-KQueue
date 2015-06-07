@@ -52,8 +52,7 @@
             "File::Path" : "0",
             "Test::More" : "0",
             "Test::SharedFork" : "0",
-            "parent" : "0",
-            "t::Util" : "0"
+            "parent" : "0"
          }
       }
    },
