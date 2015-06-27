@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/karupanerura/p5-Filesys-Notify-KQueue.svg?branch=master)](https://travis-ci.org/karupanerura/p5-Filesys-Notify-KQueue)
 # NAME
 
 Filesys::Notify::KQueue - Wrap IO::KQueue for watching file system.
